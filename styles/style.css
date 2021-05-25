@@ -1,10 +1,15 @@
-body, p, h1, ul, li, blockquote {
+body,
+p,
+h1,
+ul,
+li,
+blockquote {
   padding: 0px;
   margin: 0px;
 }
 
 body {
-  font-family: 'Vollkorn', Georgia, serif;
+  font-family: "Vollkorn", Georgia, serif;
 }
 
 li {
@@ -17,7 +22,7 @@ a {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
   width: 100%;
   border-radius: 5px;
 }
@@ -27,15 +32,37 @@ img {
 .structure {
   display: grid;
   grid-template-columns: minmax(160px, 1fr) 3fr 300px;
-  grid-template-areas: 
+  grid-template-areas:
     "header header header"
     "sidenav content adverts"
     "footer footer footer";
 }
 
+@media (max-width: 1200px) {
+  .structure {
+    grid-template-areas:
+      "header header header"
+      "sidenav content content"
+      "sidenav adverts adverts"
+      "footer footer footer";
+  }
+}
+
+@media (max-width: 760px) {
+  .structure {
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "header"
+      "sidenav"
+      "content"
+      "adverts"
+      "footer";
+  }
+}
+
 .header {
   grid-area: header;
-  background: linear-gradient(135deg, #8844ee, #B07dfb);
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
   padding: 30px;
   display: grid;
   grid-template-columns: 1fr auto;
@@ -52,13 +79,13 @@ header nav a {
   padding: 10px;
   color: white;
   font-size: 1.125em;
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  transition: .1s;
+  transition: 0.1s;
 }
 
 .header nav a:hover {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .header li + li {
@@ -67,6 +94,21 @@ header nav a {
 
 .logo {
   max-width: 200px;
+}
+
+@media (max-width: 760px) {
+  .header {
+    grid-template-columns: auto;
+  }
+  .logo {
+    margin-bottom: 20px;
+  }
+  .header nav a {
+    font-size: 1em;
+  }
+  .header li + li {
+    margin-left: 10px;
+  }
 }
 
 .sidenav {
@@ -88,7 +130,42 @@ header nav a {
 }
 
 .sidenav li a:hover {
-  background: #B07dfb
+  background: #b07dfb;
+}
+
+@keyframes arrow {
+  from {
+    right: 30px;
+  }
+  to {
+    right: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .sidenav {
+    position: relative;
+    overflow-x: auto;
+    padding: 0 30px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sidenav::after {
+    position: absolute;
+    content: '→';
+    top: 5px;
+    right: 30px;
+    color: rgba(0, 0, 0, 0.3);
+    animation: arrow .5s ease-in 0s alternate infinite;
+  }
+  .sidenav ul {
+    display: flex;
+  }
+  .sidenav li {
+    flex: 1 0 60px;
+  }
+  .sidenav li a {
+    margin: 30px 30px 30px 0;
+  }
 }
 
 .col-wide {
@@ -114,11 +191,17 @@ header nav a {
   gap: 30px;
 }
 
+@media (max-width: 600px) {
+  .content {
+    grid-template-columns: auto;
+  }
+}
+
 p {
   font-size: 1.2em;
   line-height: 1.6;
   letter-spacing: 0.005em;
-  color: rgba(0, 0, 0, .7);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .info p + p {
@@ -126,7 +209,7 @@ p {
 }
 
 .title {
-  color: #B07dfb;
+  color: #b07dfb;
 }
 
 .title h1 {
@@ -148,7 +231,7 @@ p {
 .attributes > div {
   width: 80px;
   text-align: center;
-  background: linear-gradient(135deg, #8844ee, #B07dfb);
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
   border-radius: 5px;
   box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.15);
   position: relative;
@@ -160,7 +243,7 @@ p {
 
 .attributes span {
   display: block;
-  color: #B07dfb;
+  color: #b07dfb;
 }
 
 .number {
@@ -179,27 +262,28 @@ p {
 
 .spotlight {
   font-size: 0.875em;
-  color: #B07dfb;
+  color: #b07dfb;
   max-width: 16em;
 }
 
-.attributes-list, .quote {
+.attributes-list,
+.quote {
   align-self: start;
   padding: 30px;
   border-radius: 5px;
   box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.15);
-  background: linear-gradient(135deg, #8844ee, #B07dfb);
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
 }
 
 .attributes-list li {
   color: white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 1.125em;
   padding: 15px;
 }
 
 .attributes-list li + li {
-  border-top: solid 2px #B07dfb;
+  border-top: solid 2px #b07dfb;
 }
 
 .quote p {
@@ -218,11 +302,12 @@ p {
   align-content: start;
   padding: 30px;
   gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .footer {
   grid-area: footer;
-  background: linear-gradient(135deg, #8844ee, #B07dfb);
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
 }
 
 .footer p {
@@ -230,4 +315,3 @@ p {
   text-align: center;
   padding: 30px;
 }
-
